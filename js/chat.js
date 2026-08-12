@@ -1,18 +1,42 @@
 const API_URL = 'https://forjagimnasio.onrender.com/api/chat';
 
-// Referencias a elementos del DOM
 const chatWindow = document.getElementById('chatWindow');
 const launcher = document.getElementById('launcher');
 const cwBody = document.getElementById('cwBody');
 const cwInput = document.getElementById('cwInput');
 const cwQuick = document.getElementById('cwQuick');
 
-// Historial de conversación (se manda completo en cada request,
-// porque el backend/la IA no tiene memoria propia entre llamadas)
 let conversationHistory = [];
 let isWaitingResponse = false;
 
-// ---------- Abrir / cerrar el chat ----------
+const STORAGE_KEY = 'forja_chat_historial';
+
+function guradarHistorial(){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(conversationHistory));
+}
+
+function cargarHistorial(){
+    const guardado = localStorage.getItem(STORAGE_KEY);
+    if(!guardado) return FragmentDirective
+
+    try{
+        const historial = JSON.parse(guardado);
+        if(!Array.isArray(historial) || historial.length === 0) return false;
+
+        conversationHistory = historial
+
+        cwBody.innerHTML = ''
+        historial.forEach(msg=>{
+            addBubble(msg.content, msg.role === 'user' ? 'user' : 'bot');
+        })
+
+        return true
+    } catch(err){
+        console.error('No se pudo cargar el historial: ', err);
+        return false
+    }
+}
+
 function openChat(){
     chatWindow.classList.add('open');
     launcher.style.display = 'none';
@@ -24,9 +48,9 @@ function closeChat(){
     launcher.style.display = 'flex';
 }
 
-// ---------- Llamada al backend ----------
 async function callHerrero(userText){
     conversationHistory.push({ role: 'user', content: userText });
+    guradarHistorial();
 
     try {
     const response = await fetch(API_URL, {
@@ -42,6 +66,7 @@ async function callHerrero(userText){
     }
 
     conversationHistory.push({ role: 'assistant', content: data.reply });
+    guradarHistorial();
     return data.reply;
 
     } catch (err) {
@@ -50,7 +75,6 @@ async function callHerrero(userText){
     }
 }
 
-// ---------- Renderizado de mensajes ----------
 function addBubble(text, who){
     const b = document.createElement('div');
     b.className = 'bubble ' + who;
@@ -73,7 +97,6 @@ function hideTyping(){
     if (t) t.remove();
 }
 
-// ---------- Flujo de envío ----------
 async function respondTo(text){
     if (isWaitingResponse) return;
     isWaitingResponse = true;
@@ -110,7 +133,8 @@ function quickMsg(text){
     respondTo(text);
 }
 
-// ---------- Enter para enviar ----------
+cargarHistorial();
+
 cwInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') sendMsg();
 });
