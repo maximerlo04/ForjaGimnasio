@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/api/chat';
+const API_URL = 'https://forjagimnasio.onrender.com/api/chat';
 
 // Referencias a elementos del DOM
 const chatWindow = document.getElementById('chatWindow');
