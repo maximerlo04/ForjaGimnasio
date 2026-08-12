@@ -1,0 +1,187 @@
+/*HERO*/
+
+section{
+    padding: 96px 0;
+}
+
+.dividier{
+    border-top: 1px solid #38352c;
+    width: 100%;
+}
+
+#Hero{
+    padding: 180px 28px 90px;
+    max-width: 1160px;
+    overflow: hidden;
+    margin: 0 auto;
+    background-color: #1c1a15;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 50px;
+    align-items: center;
+}
+
+
+.hero-glow{
+    position: absolute;
+    top: -120px;
+    right: -160px;
+    width: 640px;
+    height: 640px;
+    background: radial-gradient(circle, rgba(255, 90, 31, 0.22),transparent 65%);
+    pointer-events: none;
+    filter: blur(10px);
+}
+
+.eyebrow{
+    font-family: 'IBM Plex Mono', monospace;
+    color: #ff5a1f;
+    font-size: 15px;
+    margin-bottom: 22px;
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.text-content h1{
+    font-size: clamp(44px, 6.4vw, 76px);
+    line-height: 0.98;
+    color: #f2eee3;
+    font-weight: 700;
+    margin-bottom: 22px;
+}
+
+.text-content h1 .out{
+    color: transparent;
+    -webkit-text-stroke: 1px #b6b0a0;
+}
+
+.text-content p{
+    color: #b6b0a0;
+    font-size: 17px;
+    margin-bottom: 22px;
+    max-width: 430px;
+}
+
+.hero-buttons{
+    display: flex;
+    margin-bottom: 22px;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.reserve-button, .openAI-button{
+    color: #f2eee3;
+    font-family: 'Oswald', sans-serif;
+    background-color: transparent;
+    padding: 11px 20px;
+    font-size: 15px;
+    border: 1px solid #38352c;
+    border-radius: 5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease, color .15 ease;
+}
+
+.reserve-button:hover, .openAI-button:hover{
+    color: #1c1a15;
+    background: #ff5a1f;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px -4px rgba(250, 90, 31, .55);
+}
+
+.stats{
+    display: flex;
+    gap: 20px;
+}
+
+.num{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 22px;
+    font-weight: 600;
+    color: #ff8a3d;
+}
+
+.lbl{
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 13px;
+    color: #8b93a1;
+}
+
+.forge-panel{
+    background: #1c1a15;
+    border: 1px solid #38352c;
+    border-radius: 6px;
+    padding: 26px;
+    overflow: hidden;
+    position: relative;
+}
+
+.forge-panel::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:linear-gradient(160deg, rgba(255, 90, 31, 0.08), transparent 55%);
+}
+
+.forge-panel .tag{
+    font-family: 'IBM Plex Mono', monospace;
+    color: #8b93a1;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.forge-panel .tag .rec{
+    color: #ff5a1f;
+}
+
+.heat-block{
+    margin-top: 18px;
+}
+
+.heat-block .row{
+    display: flex;
+    justify-content: space-between;
+    color: #b6b0a0;
+    font-size: 15px;
+    margin-bottom: 6px;
+}
+
+.gauge{
+    display: flex;
+    align-items: center;
+    gap:2px;
+    height: 6px;
+    width: 100%;
+}
+
+.gauge.glow span.lit{
+    box-shadow: 0 0 8px #ff5a1f;
+}
+
+.gauge span.lit{
+    background: linear-gradient(90deg, #7a3016, #ff5a1f);
+}
+
+.gauge span{
+    flex: 1;
+    height: 100%;
+    background:#38352c;
+    border-radius: 1px;
+}
+
+.heat-block-text{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    text-transform: uppercase;
+    color: #8b93a1;
+    letter-spacing: 0.08em;
+    margin-top: 18px;
+}

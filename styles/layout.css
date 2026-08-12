@@ -1,0 +1,230 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Oswald', sans-serif;
+}
+
+html,body{
+    overflow-x: hidden;
+    background: #1c1a15;
+}
+
+/*NAV*/
+
+.logo{
+    font-family: 'Oswald', sans-serif;
+    color:#f2eee3;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 0.08rem;
+}
+
+.logo span{
+    font-family: 'Oswald', sans-serif;
+    color: #ff5a1f;
+}
+
+header{
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    z-index: 50;
+    background: rgba(20, 19, 15, 0.86);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #38352c;
+}
+
+.nav{
+    margin: 0 auto;
+    max-width: 1180px;
+    display: flex;
+    padding: 20px 40px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav__list{
+    display: flex;
+}
+
+.nav__item {
+    list-style: none;
+    padding: 0 20px;
+}
+
+.nav__item a{
+    color: #b6b0a0;
+    text-decoration: none;
+    font-size: 17px;
+    transition: color .15s ease;
+}
+
+.nav__item a:hover{
+    color: #ff5a1f;
+}
+
+.trial-button{
+    font-family: 'Oswald', sans-serif;
+    background-color: #ff5a1f;
+    padding: 11px 20px;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.trial-button:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px -4px rgba(250, 90, 31, .55);
+}
+
+/*PARTNERS*/
+
+.partners-content{
+    max-width: 1180px;
+    background: #1c1a15;
+    margin: 0 auto;
+}
+
+.partners-head{
+    max-width: 640px;
+    margin-bottom: 56px;
+}
+
+.partners-content h2{
+    font-size: clamp(30px, 4vw, 44px);
+    line-height: 0.98;
+    color: #f2eee3;
+    font-weight: 700;
+    margin-bottom: 22px;
+}
+
+.partners-grid{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 30px;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.partners-card{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    padding: 20px;
+    border: 1px solid #38352c;
+    border-radius: 5px;
+}
+
+.partners-card p{
+    color: #b6b0a0;
+    margin-bottom: 15px;
+}
+
+.partners-card span{
+    color: #f2eee3;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.partners-card .role{
+    font-family: 'IBM Plex Mono', monospace;
+    color: #ff5a1f;
+    font-size: 16px;
+}
+
+
+/*FINAL*/
+
+.final{
+    text-align: center;
+    padding: 110px 28px;
+    position: relative;
+    background: radial-gradient(circle at 50% 0%, rgba(255, 90, 31, 0.14), transparent 60%);
+}
+
+.final h2{
+    font-size: clamp(34px, 5.5vw, 58px);
+    margin-bottom: 22px;
+    font-weight: 700;
+    color: #f2eee3;
+}
+
+.final p{
+    color: #b6b0a0;
+    font-size: 17px;
+    margin-bottom: 34px;
+}
+
+.final-btn.lg{
+    padding: 15px 28px;
+    font-size: 16px;
+}
+
+.final-btn{
+    background: #ff5a1f;
+    color: #1c1a15;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.04em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.final-btn:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px -4px rgba(250, 90, 31, .55);
+}
+
+.final-btn:active{
+    opacity: .7;
+}
+
+/*FOOTER*/
+
+footer{
+    border-top: 1px solid #38352c;
+    padding: 50px 28px 34px;
+}
+
+footer .wrap{
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.footer-grid{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-grid p, .footer-grid a{
+    color: #b6b0a0;
+    font-size: 14px;
+    margin-bottom: 9px;
+    display: block;
+    text-decoration: none;
+}
+
+.footer-grid h4{
+    color: #8b93a1;
+    font-size: 15px;
+    margin-bottom: 9px;
+}
+
+.fotter-bottom{
+    display: flex;
+    justify-content: space-between;
+    color: #b6b0a0;
+    font-size: 12px;
+    flex-wrap: wrap;
+}

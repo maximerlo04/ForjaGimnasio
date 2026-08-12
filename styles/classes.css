@@ -1,0 +1,88 @@
+/*Classes*/
+
+section{
+    padding: 96px 0;
+}
+
+.dividier{
+    border-top: 1px solid #38352c;
+    width: 100vw;
+}
+
+.sec-head{
+    max-width: 640px;
+    margin-bottom: 56px;
+}
+
+.classes-content{
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.classes-content h2{
+    font-size: clamp(30px, 4vw, 44px);
+    line-height: 0.98;
+    color: #f2eee3;
+    font-weight: 700;
+    margin-bottom: 22px;
+}
+
+.classes-content p{
+    color: #b6b0a0;
+    font-size: 17px;
+    margin-bottom: 22px;
+    letter-spacing: 0.04em;
+}
+
+.reveal{
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity .6s ease, transform .6s ease;
+}
+
+.reveal.in{
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.prog-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.prog-card{
+    background: #1c1a15;
+    border: 1px solid #38352c;
+    padding: 26px 22px;
+    border-radius: 6px;
+    transition: border-color .2s ease, transform .2s ease;
+}
+
+.prog-card:hover{
+    border-color: #7a3016;
+    transform: translateY(-3px);
+}
+
+.prog-card h3{
+    color: #f2eee3;
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.prog-card .ico{
+    font-size: 26px;
+    margin-bottom: 18px;
+}
+
+.prog-card p{
+    color: #b6b0a0;
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+

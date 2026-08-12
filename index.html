@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORJA | Gimasio</title>
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/hero.css">
+    <link rel="stylesheet" href="styles/classes.css">
+    <link rel="stylesheet" href="styles/chat.css">
+    <link rel="stylesheet" href="styles/trainers.css">
+    <link rel="stylesheet" href="styles/plans.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+    <script src="js/chat.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav class="nav">
+            <div class="logo">
+                FOR
+                <span>JA</span>
+            </div>
+            <ul class="nav__list">
+                <li class="nav__item"><a href="#Classes">Clases</a></li>
+                <li class="nav__item"><a href="#Chat">Entrenador IA</a></li>
+                <li class="nav__item"><a href="#Trainers">Profesores</a></li>
+                <li class="nav__item"><a href="#Plans">Planes</a></li>
+            </ul>
+            <button class="trial-button" onclick="document.getElementById('Plans').scrollIntoView({behavior:'smooth'})">Prueba gratis</button>
+        </nav>
+    </header>
+    <section id="Hero">
+        <div class="hero-glow"></div>
+        <div class="text-content">
+            <div class="eyebrow">
+                GIMNASIO DE FUERZA · ENTRENA AL LIMITE 
+            </div>
+            <h1>
+                FORJA <br> TU <span class="out">LIMITE</span>
+            </h1>
+            <p>
+                Fuerza real, entrenadores que corrigen tu técnica y una rutina que se ajusta cada semana. Nada de máquinas vacías ni planes genéricos: acá cada sesión se calienta, se golpea y se templa.
+            </p>
+            <div class="hero-buttons">
+                <button class="reserve-button" onclick="document.getElementById('Plans').scrollIntoView({behavior:'smooth'})">Reserva Clase de Prueba</button>
+                <button class="openAI-button" onclick="openChat()">Habla con el Entrenador IA</button>
+            </div>
+            <div class="stats">
+                <div class="stat">
+                    <div class="num">1200</div>
+                    <div class="lbl">Socios Activos</div>
+                </div>
+                <div class="stat">
+                    <div class="num">22</div>
+                    <div class="lbl">Entrenadores</div>
+                </div>
+                <div class="stat">
+                    <div class="num">06-22hs</div>
+                    <div class="lbl">Lunes a Sabados</div>
+                </div>
+            </div>  
+        </div>
+        <div class="forge-panel">
+                <div class="tag">
+                    <span>RUTINA DE HOY · MARTES</span>
+                    <span class="rec">
+                        EN VIVO
+                    </span>
+                </div>
+                <div class="heat-block">
+                    <div class="row">
+                        <span>Press Banca</span>
+                        <b>3×6-8 · 100kg </b>
+                    </div>
+                    <div class="gauge glow">
+                        <span class="lit"></span>
+                        <span class="lit"></span>
+                        <span class="lit"></span>
+                        <span class="lit"></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                <div class="heat-block">
+                    <div class="row">
+                        <span>Press Inclinado</span>
+                        <b>3×6-8 · 90kg </b>
+                    </div>
+                    <div class="gauge glow">
+                        <span class="lit"></span>
+                        <span class="lit"></span>
+                        <span class="lit"></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                <div class="heat-block">
+                    <div class="row">
+                        <span>Peck deck</span>
+                        <b>3×10-12 · 50kg </b>
+                    </div>
+                    <div class="gauge glow">
+                        <span class="lit"></span>
+                        <span class="lit"></span>
+                        <span class="lit"></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>         
+            <div class="heat-block-text">Ajustado por el Entrenador IA segun el ultimo entrenamiento<div>       
+        </div>
+    </section>
+    <section id="Classes" class="dividier">
+        <div class="classes-content">
+            <div class="wrap">
+                <div class="sec-head reveal in">
+                    <div class="eyebrow">
+                        LO QUE SE ENTRENA ACÁ
+                    </div>
+                    <h2>
+                        CUATRO FORMAS DE ENTRENAR <br> TU CUERPO
+                    </h2>
+                    <p>
+                        Cada programa tiene su propia temperatura de trabajo. Elegís una o combinás varias, tu plan se acomoda solo.
+                    </p>
+                </div>
+            </div>
+        </div> 
+        <div class="prog-grid">
+            <div class="prog-card reveal in">
+                <div class="ico">🏋️</div>
+                <h3>Fuerza</h3>
+                <p>Todas las maquinas que necesites para mejorar tu fisico.</p>
+            </div>
+            <div class="prog-card reveal in">
+                <div class="ico">⚡</div>
+                <h3>Funcional</h3>
+                <p>Circuitos de alta exigencia, poco descanso, mucha técnica.</p>
+            </div>
+            <div class="prog-card reveal in">
+                <div class="ico">🥊</div>
+                <h3>Boxeo</h3>
+                <p>Saco, pads y trabajo de piernas para soltar tensión.</p>
+            </div>
+            <div class="prog-card">
+                <div class="ico">🌀</div>
+                <h3>Movilidad</h3>
+                <p>Recuperación activa para entrenar sin romperte.</p>
+            </div>
+        </div>       
+    </section>
+    <section id="Chat" class="dividier">
+        <div class="chat-grid">
+            <div class="chat-content reveal in">
+                <div class="eyebrow">
+                    TU ASISTENTE DE RUTINAS
+                </div>
+                <h2>El Entrenador IA arma tu plan, <br> no te lo copia y pega</h2>
+                <p>
+                    Es el asistente que vive en FORJA: le contás cómo te sentiste después de entrenar y él ajusta pesos, series y descanso para la próxima sesión. Disponible siempre en la esquina de la pantalla.
+                </p>
+                <div class="list">
+                    <div class="li">Rutinas que suben o bajan de intensidad según tu recuperación real.</div>
+                    <div class="li">Responde dudas de técnica al instante, antes de que te lastimes.</div>
+                    <div class="li">Arma planes para objetivos puntuales: fuerza, hipertrofia o resistencia.</div>
+                </div>
+                <button class="chatIa-btn" onclick="openChat()">🔥 Proba a tu Entrenador IA</button>
+            </div>
+            <div class="chat-trainerIA reveal in" >
+                <div class="head">
+                    <div class="dc-avatar">🔥</div>
+                    <div>
+                        <span class="name">Entrenador IA</span>
+                        <div class="status">
+                            En linea
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-conteiner">
+                    <div class="msg user">Hoy las piernas me quedaron destruidas del martes</div>
+                    <div class="msg bot">Anotado. Bajo un 15% la carga de sentadilla para hoy y cambio el peso muerto por una maquina de isquios acostado. ¿Seguimos con el mismo volumen de series?</div>
+                    <div class="msg user">Sí, dale</div>
+                    <div class="msg bot">Rutina actualizada. 4×6 sentadilla a 72kg, maquina de isquios 3×12, y cierro con movilidad de cadera 8 min.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="Trainers" class="dividier">
+        <div class="trainers-content">
+            <div class="wrap">
+                <div class="trainer-head reveal in">
+                    <div class="eyebrow">Equipo</div>
+                    <h2>Los que corrigen tu técnica</h2>
+                    <p>Entrenadores certificados que están en el piso, no detrás de un escritorio.</p>
+                </div>
+            </div>
+            <div class="trainer-grid">
+                <div class="trainer-card reveal in">
+                    <div class="trainer-photo">🧑‍🏋️</div>
+                    <h3>Fabian Gomez</h3>
+                    <div class="role">FUERZA · POWERLIFTING</div>
+                </div>
+                <div class="trainer-card reveal in">
+                    <div class="trainer-photo">🥊</div>
+                    <h3>Lucas Vazquez</h3>
+                    <div class="role">BOXEO · ACONDICIONAMIENTO</div>
+                </div>
+                <div class="trainer-card reveal in">
+                    <div class="trainer-photo">🧘</div>
+                    <h3>Juliana Correa</h3>
+                    <div class="role">MOVILIDAD · RECUPERACIÓN</div>
+                </div>
+                <div class="trainer-card reveal in">
+                    <div class="trainer-photo">🏋️‍♂️</div>
+                    <h3>Milagros Sanchez</h3>
+                    <div class="role">FUNCIONAL · HIIT</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="Plans" class="dividier">
+        <div class="plans-content reveal in">
+            <div class="plans-head">
+                <div class="eyebrow">MEMBRESIAS</div>
+                <h2>Elegí tu plan de <br>entrenamiento</h2>
+                <p>Sin permanencia. Cambiás o cancelás cuando quieras.</p>
+            </div>
+            <div class="plans-grid">
+                <div class="plans-card reveal in">
+                    <span class="plans-head">Basico</span>
+                    <h3>ACCESO LIBRE</h3>
+                    <div class="price">
+                        $28.000
+                        <span>/mes</span>
+                    </div>
+                    <div class="gauge">
+                        <span class="lit"></span>
+                        <span class="lit"></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <ul class="card-list">
+                        <li class="card-items">Acceso a sala de pesas y cardio</li>
+                        <li class="card-items">Rutina base del Entrenador IA</li>
+                        <li class="card-items">2 clases grupales por semana</li>
+                    </ul>
+                    <button class="btn-submit">Elegir Plan</button>
+                </div>
+                <div class="plans-card mid reveal in">
+                    <span class="plans-head">Intermedio</span>
+                    <h3>FORJA COMPLETA</h3>
+                    <div class="price">
+                        $42.000
+                        <span>/mes</span>
+                    </div>
+                    <div class="gauge glow">
+                        <span class="lit"></span>
+                        <span class="lit"></span>
+                        <span class="lit"></span>
+                        <span class="lit"></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <ul class="card-list">
+                        <li class="card-items">Clases grupales ilimitadas</li>
+                        <li class="card-items">Entrenador IA con ajustes semanales</li>
+                        <li class="card-items">1 sesión mensual con entrenador</li>
+                        <li class="card-items">Acceso a boxeo y funcional</li>
+                    </ul>
+                    <button class="btn-submit mid-btn">Elegir Plan</button>
+                </div>
+                <div class="plans-card reveal in">
+                    <span class="plans-head">Avanzado</span>
+                    <h3>ENTRENAMIENTO 1 A 1</h3>
+                    <div class="price">
+                        $68.000
+                        <span>/mes</span>
+                    </div>
+                    <div class="gauge ">
+                        <span class="lit"></span>
+                        <span class="lit"></span>
+                        <span class="lit"></span>
+                        <span class="lit"></span>
+                        <span class="lit"></span>
+                        <span class="lit"></span>
+                    </div>
+                    <ul class="card-list">
+                        <li class="card-items">Todo lo de Forja completa</li>
+                        <li class="card-items">Entrenador personal semanal</li>
+                        <li class="card-items">Plan nutricional básico</li>
+                        <li class="card-items">Prioridad de horarios</li>
+                    </ul>
+                    <button class="btn-submit">Elegir Plan</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="Partners" class="dividier">
+        <div class="partners-content">
+            <div class="partners-head">
+                <div class="eyebrow">SOCIOS</div>
+                <h2>Lo que dicen los que ya se inscribieron</h2>
+            </div>
+            <div class="partners-grid">
+                <div class="partners-card">
+                    <p>El Entrenador IA me bajó la carga justo la semana que necesitaba y no me di cuenta hasta después. Es el primer plan que se adapta a mí.</p>
+                    <span class="name">Valentina R.</span>
+                    <div class="role">SOCIA · 8 MESES</div>
+                </div>
+                <div class="partners-card">
+                    <p>Vengo de gimnasios donde nadie te mira la técnica. Acá te corrigen antes de que te lesiones.</p>
+                    <span class="name">Camila N.</span>
+                    <div class="role">SOCIA · 5 MESES</div>
+                </div>
+                <div class="partners-card">
+                    <p>Empecé sin saber nada de powerlifting y en tres meses ya hacía sentadilla con buena forma.</p>
+                    <span class="name">Federico A.</span>
+                    <div class="role">SOCIO · 1 AÑO</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="final">
+        <h2>TU PRIMERA SESION <br> ES GRATIS</h2>
+        <p>Veinte minutos de evaluación, una rutina armada por el Entrenador IA y una clase para probar el ambiente.</p>
+        <button class="final-btn lg" onclick="document.getElementById('Plans').scrollIntoView({behavior:'smooth'})">RESERVA AHORA</button>
+    </div>
+    <footer class="footer">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div>
+                    <div class="logo">FOR <span>JA</span></div>
+                    <p>Av. Mayo 300, Ramos Mejia, Buenos Aires. Lunes a domingo de 6 a 23h.</p>
+                </div>
+                <div>
+                    <h4>ENTRENAR</h4>
+                    <a href="#Classes">Clases</a>
+                    <a href="#Chat">Entrenador IA</a>
+                    <a href="#Plans">Planes</a>
+                </div>
+                <div>
+                    <h4>ENTRENADORES</h4>
+                    <a href="#Trainers">Entrenadores</a>
+                    <a href="">Horarios</a>
+                    <a href="">Ubicacion</a>
+                </div>
+                <div>
+                    <h4>CONTACTO</h4>
+                    <a href="https://gmail.com">forjagym@gmail.com</a>
+                    <a href="https://api.whatsapp.com" target="_blank">11 4598-3212</a>
+                </div>
+            </div>
+            <div class="fotter-bottom">
+                <span>© 2026 FORJA. Todos los derechos reservados.</span>
+                <span>Proyecto personal - No es un sitio real</span>
+            </div>
+        </div>
+    </footer>
+    <button class="chat-launcher" id="launcher" onclick="openChat()" style="display: none;">
+        <span class="dot"></span>
+        🔥 Entrenador IA
+    </button>
+    <div class="chat-window open" id="chatWindow">
+        <div class="cw-head">
+            <div class="dc-avatar">🔥</div>
+            <div class="meta">
+                <div class="name">Entrenador IA</div>
+                <div class="status">
+                    Asistente de rutinas · en línea
+                </div>
+            </div>
+            <button class="cw-close" onclick="closeChat()">X</button>
+        </div>
+        <div class="cw-body" id="cwBody">
+            <div class="bubble bot">
+                Che, ¿cómo venís? Contame qué entrenaste hoy o tocá una opción y armamos la rutina.
+            </div>
+        </div>
+        <div class="cw-quick" id="cwQuick">
+            <span class="chip" onclick="quickMsg('Armar Rutina')">Armar Rutina</span>
+            <span class="chip" onclick="quickMsg('Soy Principiante')">Soy Principiante</span>
+            <span class="chip" onclick="quickMsg('Estoy con dolor')">Estoy con dolor</span>
+            <span class="chip" onclick="quickMsg('Quiero saber la tecnica de cierto ejercicio')">Quiero saber la tecnica de cierto ejercicio</span>
+        </div>
+        <div class="cw-input-row">
+            <input type="text" id="cwInput" placeholder="Escribi tu consulta..." onkeydown="if(event.key==='Enter')sendMsg()">
+            <button class="cw-send" onclick="sendMsg()">➤</button>
+        </div>
+    </div>
+</body>
+</html>

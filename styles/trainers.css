@@ -1,0 +1,66 @@
+/*TRAINERS*/
+
+.trainers-content{
+    background: #1c1a15;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.trainer-head{
+    max-width: 640px;
+    margin-bottom: 56px;
+}
+
+.trainers-content h2{
+    font-size: clamp(30px, 4vw, 44px);
+    line-height: 0.98;
+    color: #f2eee3;
+    font-weight: 700;
+    margin-bottom: 22px;
+}
+
+.trainers-content p{
+    color: #b6b0a0;
+    font-size: 17px;
+    margin-bottom: 22px;
+    letter-spacing: 0.04em;
+}
+
+.trainer-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.trainer-card{
+    background: #1c1a15;
+    border: 1px solid #38352c;
+    padding: 50px 20px 30px 20px;
+    border-radius: 6px;
+    transition: border-color .2s ease, transform .2s ease;
+}
+
+.trainer-card:hover{
+    border-color: #7a3016;
+    transform: translateY(-3px);
+}
+
+.trainer-card .trainer-photo{
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 16px;
+}
+
+.trainer-card h3{
+    color: #f2eee3;
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.trainer-card .role{
+    color: #ff8a3d;
+    font-size: 13px;
+}

@@ -1,0 +1,148 @@
+section{
+    padding: 96px 0;
+}
+
+.dividier{
+    border-top: 1px solid #38352c;
+    width: 100vw;
+}
+
+.plans-content{
+    background: #1c1a15;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.plans-head{
+    max-width: 640px;
+    margin-bottom: 56px;
+}
+
+.plans-content h2{
+    font-size: clamp(30px, 4vw, 44px);
+    line-height: 0.98;
+    color: #f2eee3;
+    font-weight: 700;
+    margin-bottom: 22px;
+}
+
+.plans-content p{
+    color: #b6b0a0;
+    font-size: 17px;
+    margin-bottom: 22px;
+    letter-spacing: 0.04em;
+}
+
+.plans-grid{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 50px;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.plans-card{
+    background: #1c1a15;
+    border: 1px solid #38352c;
+    padding: 20px;
+    border-radius: 6px;
+    transition: border-color .2s ease, transform .2s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.plans-card .plans-head{
+    color: #8b93a1;
+    font-size: 13.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.plans-card h3{
+    font-size: 20px;
+    color: #f2eee3;
+    margin-bottom: 6px;
+}
+
+.plans-card .price{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 34px;
+    color: #f2eee3;
+    margin: 14px 0 0 0;
+}
+
+.plans-card .price span{
+    font-size: 14px;
+    color: #8b93a1;
+}
+
+.gauge{
+    display: flex;
+    gap: 2px;
+}
+
+.plans-card .card-list{
+    list-style: none;
+    margin: 22px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.plans-card .card-items{
+    font-size: 13.5px;
+    color:#b6b0a0;
+    display: flex;
+    gap: 10px;
+}
+
+.plans-card .card-items::before{
+    content: '✓';
+    color: #ff8a3d;
+    font-weight: 700;
+}
+
+.plans-card .btn-submit{
+    margin-top: auto;
+    width: 100%;
+    text-align: center;
+}
+
+.btn-submit{
+    font-family: 'Oswald', sans-serif;
+    background: transparent;
+    padding:10px 21px;
+    border: 1px solid #38352c;
+    border-radius: 3px;
+    color: #f2eee3;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: border-color .15s ease;
+}
+
+.btn-submit:hover{
+    border-color: #ff5a1f;
+}
+
+.plans-card.mid::before{
+    content: 'Mas Elegido';
+    top: -1px;
+    right: -1px;
+    position: absolute;
+    background: #ff5a1f;
+    color: #1c1a15;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 8px 10px;
+    border-radius: 0 7px 0 7px;
+}
+
+.plans-card.mid{
+    border-color: #ff5a1f;
+    position: relative;
+}
