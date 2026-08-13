@@ -10,7 +10,15 @@ html,body{
     background: #1c1a15;
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 /*NAV*/
+
+#hamburguer{
+    display: none;
+}
 
 .logo{
     font-family: 'Oswald', sans-serif;

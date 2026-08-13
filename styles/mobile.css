@@ -1,0 +1,195 @@
+@media (max-width: 760px){
+
+    html,body{
+        overflow-x: hidden;
+        background: #1c1a15;
+    }
+
+    /*NAV*/
+
+    .nav__list{
+        display: none !important;
+    }
+
+    .nav__list.active{
+        display: flex !important;
+        flex-direction: column;
+        position: absolute;
+        z-index: 100;
+        border-bottom: 1px solid #38352c;
+        width: 100%;
+        background: rgba(20, 19, 15, 0.86);
+        top: 70px;
+        left: 0;
+        padding: 20px;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #hamburguer{
+        display: block;
+        font-size: 24px;
+        color: #ff5a1f;
+        cursor: pointer;
+        margin-right: auto;
+    }
+
+    .trial-button{
+        display: none;
+    }
+
+    /*HERO*/
+
+    #Hero{
+        grid-template-columns: 1fr;
+        padding: 90px 20px 60px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .hero-glow{
+        width: 300px;
+        height: 300px;
+        right: -80px;
+        top: -80px;
+    }
+
+    .text-content, .hero-buttons{
+        text-align: center;
+        justify-content: center;
+    }
+
+    .forge-panel{
+        width: 100%;
+    }
+
+    /*ClASES*/
+
+    .classes-content, .sec-head{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin: 0 20px;
+    }
+
+    .prog-grid{
+        grid-template-columns: 1fr;
+        margin: 20px;
+    }
+
+    .prog-card{
+        text-align: center;
+    }
+
+    /*CHAT*/
+
+    .chat-grid{
+        grid-template-columns: 1fr;
+    }
+
+    .chat-content{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin: 0 20px;
+    }
+
+    .chat-trainerIA{
+        margin: 10px 20px;
+    }
+
+    /*TRAINERS*/
+
+    .trainer-head{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin: 0 20px;
+    }
+
+    .trainer-grid{
+        grid-template-columns: 1fr;
+        margin: 0 20px;
+        text-align: center;
+    }
+
+    /*PLANS*/
+
+    .plans-head{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin: 0 20px;
+    }
+
+    .plans-grid{
+        grid-template-columns: 1fr;
+        margin: 0 20px;
+    }
+
+    /*Partners*/
+    
+    .partners-head{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin: 0 20px;
+    }
+
+    .partners-grid{
+        grid-template-columns: 1fr;
+        margin: 0 20px;
+    }
+
+    /*FOOTER*/
+
+    .footer-grid{
+        grid-template-columns: 1fr 1fr;
+        margin: 0 20px;
+    }
+
+    .fotter-bottom{
+        margin: 10px 20px;
+        justify-content: center;
+    }
+    
+    /*CHAT IA*/
+
+    .chat-window{
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100vh;    /* fallback para navegadores viejos */
+        height: 100dvh;   /* altura real considerando el teclado en mobile */
+        max-height: 100dvh;
+        border-radius: 0;
+        z-index: 300;
+    }
+
+    .chat-launcher{
+        right: 16px;
+        bottom: 16px;
+        padding: 12px 16px;
+        font-size: 13px;
+        z-index: 200;
+    }
+
+    .cw-close{
+        font-size: 26px;
+        padding: 8px;
+    }
+
+    .cw-input-row input{
+        font-size: 16px; /* evita el zoom automático de Safari/iOS */
+    }
+
+    .cw-body{
+        flex: 1;
+        min-height: 0; /* necesario para que el scroll interno funcione bien dentro de un flex con altura 100% */
+    }
+}

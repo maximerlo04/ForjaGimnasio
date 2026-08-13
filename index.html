@@ -10,13 +10,18 @@
     <link rel="stylesheet" href="styles/chat.css">
     <link rel="stylesheet" href="styles/trainers.css">
     <link rel="stylesheet" href="styles/plans.css">
+    <link rel="stylesheet" href="styles/mobile.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
     <script src="js/chat.js" defer></script>
 </head>
 <body>
     <header>
         <nav class="nav">
+            <div id="hamburguer">
+                <i class="ti ti-menu-2 hamburger"></i>
+            </div>
             <div class="logo">
                 FOR
                 <span>JA</span>
@@ -365,7 +370,7 @@
         <span class="dot"></span>
         🔥 Entrenador IA
     </button>
-    <div class="chat-window open" id="chatWindow">
+    <div class="chat-window" id="chatWindow">
         <div class="cw-head">
             <div class="dc-avatar">🔥</div>
             <div class="meta">
@@ -392,5 +397,6 @@
             <button class="cw-send" onclick="sendMsg()">➤</button>
         </div>
     </div>
+    <script src="js/nav.js"></script>
 </body>
 </html>
