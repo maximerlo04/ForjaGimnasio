@@ -99,7 +99,7 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
 // ===== Qué pasa cuando el login/registro sale bien =====
 function onLoginSuccess(){
     document.querySelectorAll('.solo-logueado').forEach(el => el.style.display = '');
-    document.getElementById('trial-button-nav').textContent = 'Mi cuenta';
+    document.getElementById('trial-button').textContent = 'Mi cuenta';
 }
 
 // al cargar la página, revisar si ya había sesión iniciada de antes
