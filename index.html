@@ -11,10 +11,12 @@
     <link rel="stylesheet" href="styles/trainers.css">
     <link rel="stylesheet" href="styles/plans.css">
     <link rel="stylesheet" href="styles/mobile.css">
+    <link rel="stylesheet" href="styles/login.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
     <script src="js/chat.js" defer></script>
+    <script src="js/login.js" defer></script>
 </head>
 <body>
     <header>
@@ -31,8 +33,9 @@
                 <li class="nav__item"><a href="#Chat">Entrenador IA</a></li>
                 <li class="nav__item"><a href="#Trainers">Profesores</a></li>
                 <li class="nav__item"><a href="#Plans">Planes</a></li>
+                <li class="nav__item"><a href="routine.html" class="solo-logueado">Tu rutina</a></li>
             </ul>
-            <button class="trial-button" onclick="document.getElementById('Plans').scrollIntoView({behavior:'smooth'})">Prueba gratis</button>
+            <button class="trial-button" onclick="planClick()">Prueba gratis</button>
         </nav>
     </header>
     <section id="Hero">
@@ -48,7 +51,7 @@
                 Fuerza real, entrenadores que corrigen tu técnica y una rutina que se ajusta cada semana. Nada de máquinas vacías ni planes genéricos: acá cada sesión se calienta, se golpea y se templa.
             </p>
             <div class="hero-buttons">
-                <button class="reserve-button" onclick="document.getElementById('Plans').scrollIntoView({behavior:'smooth'})">Reserva Clase de Prueba</button>
+                <button class="reserve-button" onclick="planClick()">Reserva Clase de Prueba</button>
                 <button class="openAI-button" onclick="openChat()">Habla con el Entrenador IA</button>
             </div>
             <div class="stats">
@@ -254,7 +257,7 @@
                         <li class="card-items">Rutina base del Entrenador IA</li>
                         <li class="card-items">2 clases grupales por semana</li>
                     </ul>
-                    <button class="btn-submit">Elegir Plan</button>
+                    <button class="btn-submit" onclick="planClick()">Elegir Plan</button>
                 </div>
                 <div class="plans-card mid reveal in">
                     <span class="plans-head">Intermedio</span>
@@ -277,7 +280,7 @@
                         <li class="card-items">1 sesión mensual con entrenador</li>
                         <li class="card-items">Acceso a boxeo y funcional</li>
                     </ul>
-                    <button class="btn-submit mid-btn">Elegir Plan</button>
+                    <button class="btn-submit mid-btn" onclick="planClick()">Elegir Plan</button>
                 </div>
                 <div class="plans-card reveal in">
                     <span class="plans-head">Avanzado</span>
@@ -300,7 +303,7 @@
                         <li class="card-items">Plan nutricional básico</li>
                         <li class="card-items">Prioridad de horarios</li>
                     </ul>
-                    <button class="btn-submit">Elegir Plan</button>
+                    <button class="btn-submit" onclick="planClick()">Elegir Plan</button>
                 </div>
             </div>
         </div>
@@ -333,7 +336,7 @@
     <div class="final">
         <h2>TU PRIMERA SESION <br> ES GRATIS</h2>
         <p>Veinte minutos de evaluación, una rutina armada por el Entrenador IA y una clase para probar el ambiente.</p>
-        <button class="final-btn lg" onclick="document.getElementById('Plans').scrollIntoView({behavior:'smooth'})">RESERVA AHORA</button>
+        <button class="final-btn lg" onclick="planClick()">RESERVA AHORA</button>
     </div>
     <footer class="footer">
         <div class="wrap">
@@ -395,6 +398,65 @@
         <div class="cw-input-row">
             <input type="text" id="cwInput" placeholder="Escribi tu consulta..." onkeydown="if(event.key==='Enter')sendMsg()">
             <button class="cw-send" onclick="sendMsg()">➤</button>
+        </div>
+    </div>
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-content" id="modal-content">
+            <div class="modal-scroll">
+                <button class="modal-close" onclick="closeModal()">X</button>
+                <div class="tabs">
+                    <div class="tab active" id="loginModal" onclick="showAuthTab('login')">Iniciar sesión</div>
+                    <div class="tab" id="registerModal" onclick="showAuthTab('register')">Registrate</div>
+                </div>
+
+                <form id="loginForm">
+                    <h2>Bienvenido de nuevo</h2>
+                    <div class="field">
+                        <label>Email</label>
+                        <input type="email" placeholder="tu@email.com">
+                    </div>
+                    <div class="field">
+                        <label>Contraseña</label>
+                        <input type="password" placeholder="Tu contraseña">
+                    </div>
+                    <div class="row">
+                        <label class="checkbox-row">
+                            <input type="checkbox">
+                            Recordame
+                        </label>
+                        <a class="forgot-password" href="#">¿Olvidaste la contraseña?</a>
+                    </div>
+                    <button type="submit" class="submit-btn">Iniciar sesión</button>
+                    <p class="note">¿No tenes cuenta? <a onclick="showAuthTab('register')">Registrate</a></p>
+                </form>
+                <form id="registerForm" style="display:none;">
+                    <h2>Crea tu cuenta</h2>
+                    <div class="field">
+                        <label>Nombre</label>
+                        <input type="text" placeholder="Tu nombre">
+                    </div>
+                    <div class="field">
+                        <label>Email</label>
+                        <input type="email" placeholder="tu@email.com">
+                    </div>
+                    <div class="field">
+                        <label>Contraseña</label>
+                        <input type="password" placeholder="Tu contraseña">
+                    </div>
+                    <div class="field">
+                        <label>Repetir contraseña</label>
+                        <input type="password" placeholder="Repeti tu contraseña">
+                    </div>
+                    <div class="terms">
+                        <label class="checkbox-row">
+                            <input type="checkbox">
+                            <span>Acepto los <a href="#">terminos</a> y la <a href="#">politica de privacidad</a> de FORJA</span>
+                        </label>
+                    </div>
+                    <button type="submit" class="submit-btn">Crear cuenta</button>
+                    <p class="note">¿Ya tenes cuenta? <a onclick="showAuthTab('login')">Iniciá sesión</a></p>
+                </form>
+            </div>
         </div>
     </div>
     <script src="js/nav.js"></script>

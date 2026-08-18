@@ -1,0 +1,196 @@
+.modal-overlay{
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 400;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter:blur(4px);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-overlay.open{
+    display: flex;
+}
+
+.modal-content{
+    position: relative;
+    background:#14130f;
+    width: 100%;
+    max-width: 380px;
+    border: 1px solid #38352c;
+    border-radius: 15px;
+    max-height: 90%;
+    overflow: hidden;     
+    padding: 0;     
+}
+
+.modal-scroll{
+    max-height: 90vh;   
+    overflow: auto;        
+    padding: 36px 20px;
+}
+
+.modal-scroll::-webkit-scrollbar {
+    width: 5px;
+}
+
+.modal-scroll::-webkit-scrollbar-thumb {
+    background: #38352c;
+    border-radius: 15px;
+}
+
+.modal-close{
+    position:absolute;
+    right: 16px;
+    top: 0;
+    font-size: 20px;
+    color: #ff5a1f;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.tabs{
+    display: flex;
+    background: #1c1a15;
+    padding: 5px;
+    margin-bottom: 30px;
+    border: 1px solid #38352c;
+    border-radius: 10px;
+}
+
+.tab {
+    background: transparent;
+    flex: 1;
+    color: #b6b0a0;
+    border-radius: 6px;
+    font-family: 'Oswald', sans-serif;
+    cursor: pointer;
+    text-align: center;
+    font-size: 13px;
+    text-transform: uppercase;
+    transition: all .15s ease;
+    user-select: none;
+    padding: 10px 0;
+}
+
+.tab.active{
+    background-color: #ff5a1f;
+    color: #1a1108;
+    font-weight: 700;
+}
+
+.modal-content h2{
+    text-transform: uppercase;
+    font-size: 26px;
+    margin-bottom: 30px;
+    letter-spacing: 0.02em;
+    color: #f2eee3;
+}
+
+.field{
+    margin-bottom: 18px;
+}
+
+.field label{
+    display: block;
+    font-size: 12.5px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: #8b93a1;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-bottom: 7px;
+}
+
+.field input{
+    width: 100%;
+    padding: 12px 14px;
+    background: #1c1a15;
+    border: 1px solid #38352c;
+    border-radius: 10px;
+    color: #f2eee3;
+    outline: none;
+    font-size: 14.5px;
+    font-family: 'Inter', sans-serif;
+    transition: border-color .15s ease;
+}
+
+.field input:focus{
+    border-color: #ff5a1f;
+    background: #1c1a15;
+}
+
+.row{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.checkbox-row{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    color: #8b93a1;
+}
+
+.forgot-password{
+    color: #ff5a1f;
+    text-decoration: none;
+}
+
+.forgot-password:hover{
+    text-decoration: underline;
+}
+
+.submit-btn{
+    width: 100%;
+    background: #ff5a1f;
+    color: #1c1a15;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    text-transform: uppercase;
+    transition: all .15s ease;
+    user-select: none;
+    padding: 10px 0;
+    margin-bottom: 16px;
+}
+
+.note{
+    text-align: center;
+    color: #8b93a1;
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+
+.note a{
+    color: #ff5a1f;
+    text-decoration: none;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.note a:hover{
+    text-decoration: underline;
+}
+
+.terms{
+    margin-bottom: 16px;
+}
+
+.terms span{
+    color: #b6b0a0;
+    font-size: 13px;
+}
+
+.terms a{
+    color: #8b93a1;
+    font-size: 13px;
+    cursor: poiner;
+}

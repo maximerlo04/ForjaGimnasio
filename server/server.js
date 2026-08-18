@@ -2,11 +2,153 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const pool = require('./db')
+
 const app = express();
+const allowedOrigins = [
+    'https://forja-gimnasio-rosy.vercel.app',
+    'http://127.0.0.1:5500',
+    'http://localhost:5500'
+];
 app.use(cors({
-    origin: 'https://forja-gimnasio-rosy.vercel.app'
+    origin: function(origin, callback){
+        // permitir requests sin origin (como Postman o curl) y los de la lista
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('No permitido por CORS'));
+        }
+    }
 }));
 app.use(express.json());
+
+// ===== Registro =====
+
+app.post('/api/register', async(req, res)=>{
+    const { nombre , email , password } = req.body;
+
+    if(!nombre || !email || !password){
+        return res.status(400).json({error: 'Faltan datos'});
+    }
+
+    try{
+        const existe = await pool.query('SELECT id FROM users WHERE email = $1', [email]);
+        if(existe.rows.length > 0){
+            return res.status(400).json({error: 'Este mail ya esta registrado'});
+        }
+
+        const hash = await bcrypt.hash(password, 10);
+
+        const result = await pool.query(
+            'INSERT INTO users (nombre, email, password_hash) VALUES ($1,$2,$3) RETURNING id, nombre, email',
+            [nombre, email, hash]
+        )
+
+        const user = result.rows[0];
+
+        const token = jwt.sign ({ userId: user.id}, process.env.JWT_SECRET, {expiresIn: '30d'})
+
+        res.json({token, user: {nombre: user.nombre, email: user.email } })
+
+    }catch(err){
+        console.error('Error en el registro', err);
+        res.status(500).json({error: 'Error al crear la cuenta'});
+    }
+    
+});
+
+// ===== Login =====
+
+app.post('/api/login', async(req,res)=>{
+    const {email, password} = req.body;
+
+    try{
+        const result = await pool.query('SELECT * FROM users WHERE email = $1 ', [email]);
+        const user = result.rows[0];
+
+        if(!user){
+            return res.status(401).json({error: 'Email o contraseña incorrectos'});
+        }
+
+        const passwordOk = await bcrypt.compare(password, user.password_hash);
+        if(!passwordOk){
+            return res.status(401).json({error: 'Email o contraseña incorrectos'})
+        }
+
+        const token = jwt.sign({userId: user.id}, process.env.JWT_SECRET, {expiresIn: '30d'});
+        res.json({token, user: {nombre: user.nombre , email: user.email } });
+
+    }catch(err){
+        console.error('Error en login', err);
+        res.status(500).json({error: 'Error al iniciar sesion'});
+    }
+});
+
+// ===== Middleware: proteger rutas que requieren sesión =====
+
+function requireAuth(req, res, next){
+    const authHeader = req.headers.authorization;
+    if(!authHeader){
+        return res.status(401).json({error: 'No hay token'})
+    }
+
+    const token = authHeader.split(' ')[1];
+
+    try{
+        const payload = jwt.verify(token, process.env.JWT_SECRET);
+        req.userId = payload.userId;
+        next();
+    }catch(err){
+        res.status(500).json({error: 'Token invalido o vencido'})
+    }
+};
+
+// ===== Traer la rutina activa del usuario logueado =====
+
+app.get('/api/routine', requireAuth, async(req, res)=>{
+    try{
+        const rutine = await pool.query(
+            'SELECT * FROM routines WHERE user_id = $1 AND activa = true LIMIT 1',
+            [req.userId]
+        );
+
+        if(routine.rows.length === 0){
+            return res.json({rutine: null, excercises: []});
+        }
+
+        const excercises = await pool.query(
+            'SELECT * FROM routine_exercises WHERE routine_id = $1 ORDER BY orden',
+            [rutine.rows[0].id]
+        )
+
+        res.json({ routine: routine.rows[0], excercises: excercises.rows});
+    }catch(err){
+        console.error('Error al traer rutina', err)
+        res.status(500).json({error: 'Error al cargar la rutina'})
+    }
+});
+
+// ===== Guardar un registro de entrenamiento =====
+
+app.post('/api/workout-log', requireAuth, async(req, res)=>{
+    const { routine_exercise_id, series_real, reps_real, peso_real, nota } = req.body;
+
+    try{
+        const result = await pool.query(
+            `INSERT INTO workout_logs (user_id, routine_exercise_id, series_real, reps_real, peso_real, nota)
+            VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
+            [req.userId, routine_exercise_id, series_real, reps_real, peso_real, nota]
+        )
+
+        res.json({ log: result.rows[0]});
+    }catch(err){
+        console.error('Error al guardar registro', err)
+        res.status(500).json({error: 'Error al guardar'})
+    }
+})
+
 
 const SYSTEM_PROMPT = `Sos "El Entrenador IA" de FORJA, un gimnasio de fuerza.
 Hablás como un entrenador argentino (usá "vos"), directo y motivador sin sobreactuar.
@@ -15,7 +157,7 @@ y lesiones de a poco antes de armar una rutina completa.
 No diagnostiques lesiones ni recomiendes fármacos o dietas restrictivas.
 Respuestas cortas, 4-6 líneas, como un chat real.`;
 
-app.post('/api/chat', async (req, res) => {
+app.post('/api/chat', requireAuth, async (req, res) => {
     const { messages } = req.body;
 
     if (!Array.isArray(messages) || messages.length === 0) {
