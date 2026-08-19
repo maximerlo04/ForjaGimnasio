@@ -152,10 +152,25 @@ app.post('/api/workout-log', requireAuth, async(req, res)=>{
 
 const SYSTEM_PROMPT = `Sos "El Entrenador IA" de FORJA, un gimnasio de fuerza.
 Hablás como un entrenador argentino (usá "vos"), directo y motivador sin sobreactuar.
-No tenés datos previos de la persona: preguntá objetivo, días disponibles, experiencia
-y lesiones de a poco antes de armar una rutina completa.
+Preguntá objetivo, días disponibles, experiencia y lesiones de a poco antes de armar una rutina completa.
 No diagnostiques lesiones ni recomiendes fármacos o dietas restrictivas.
-Respuestas cortas, 4-6 líneas, como un chat real.`;
+Respuestas cortas, 4-6 líneas, como un chat real.
+
+Cuando ya tengas info suficiente y quieras guardar o actualizar la rutina del usuario,
+agregá al FINAL de tu respuesta (después de tu mensaje normal en texto) un bloque así,
+exactamente con estas etiquetas, sin explicarlo en el texto visible:
+
+<<ROUTINE>>
+{
+    "nombre": "Rutina de fuerza",
+    "ejercicios": [
+        { "ejercicio": "Sentadilla", "series_obj": 4, "reps_obj": "6-8", "peso_obj": 80 },
+        { "ejercicio": "Press banca", "series_obj": 4, "reps_obj": "6-8", "peso_obj": 60 }
+    ]
+}
+<<END>>
+
+Solo incluí ese bloque cuando definís o modificás la rutina completa, no en cada mensaje.`;
 
 app.post('/api/chat', requireAuth, async (req, res) => {
     const { messages } = req.body;
@@ -165,38 +180,85 @@ app.post('/api/chat', requireAuth, async (req, res) => {
     }
 
     try {
-    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.GROQ_API_KEY}`
-        },
-        body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
-        max_tokens: 500,
-        messages: [
-            { role: 'system', content: SYSTEM_PROMPT },
-            ...messages
-            ]
-        })
-    });
+        const rutinaActual = await pool.query(
+            'SELECT * FROM routines WHERE user_id = $1 AND activa = true LIMIT 1',
+            [req.userId]
+        );
 
-    const data = await response.json();
+        let contextoExtra = '';
+        if (rutinaActual.rows.length > 0){
+            const ejercicios = await pool.query(
+                'SELECT * FROM routine_exercises WHERE routine_id = $1',
+                [rutinaActual.rows[0].id]
+            );
+            contextoExtra = `\n\nRutina activa actual del usuario: ${JSON.stringify(ejercicios.rows)}`
+        }
 
-    if (!response.ok) {
-        console.error('Error de Groq:', data);
-        return res.status(500).json({ error: 'Error al consultar la IA' });
-    }
+        const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${process.env.GROQ_API_KEY}`
+            },
+            body: JSON.stringify({
+                model: 'llama-3.3-70b-versatile',
+                max_tokens: 500,
+                messages: [
+                    { role: 'system', content: SYSTEM_PROMPT },
+                    ...messages
+                ]
+            })
+        });
 
-    const reply = data.choices?.[0]?.message?.content || 'Se me apagó la fragua un segundo, ¿me lo repetís?';
+        const data = await response.json();
 
-    res.json({ reply });
+        if (!response.ok) {
+            console.error('Error de Groq:', data);
+            return res.status(500).json({ error: 'Error al consultar la IA' });
+        }
+
+        let reply = data.choices?.[0]?.message?.content || 'Se me apagó la fragua un segundo, ¿me lo repetís?';
+
+        const match = reply.match(/<<ROUTINE>>([\s\S]*?)<<END>>/);
+        if(match){
+            try{
+                const rutinaData = JSON.parse(match[1].trim());
+                await guardarRuitna(req.userId, rutinaData);
+                reply = reply.replace(match[0], '').trim();
+            }catch(err){
+                console.error('Error al parsear rutina modelo:', err);
+            }
+        }
+
+        res.json({ reply });
 
     } catch (err) {
         console.error('Error llamando a Groq:', err);
         res.status(500).json({ error: 'Se cortó la conexión con la fragua' });
     }
 });
+
+async function guardarRutina(userId, rutinaData){
+    await pool.query(
+        'UPDATE routines SET activa = false WHERE user_id = $1',
+        [userId]
+    );
+
+    const nuevaRutina = await pool.query(
+        'INSERT INTO routines (user_id, nombre, activa) VALUES ($1, $2, true) RETURNING id',
+        [userId, rutinaData.nombre || 'Mi rutina']
+    );
+
+    const rutineId = nuevaRutina.rows[0].id;
+
+    for(const [i, ej] of rutinaData.ejercicios.entries()){
+        await pool.query(
+            `INSERT INTO routine_exercises (routine_id, ejercicio, series_obj, reps_obj, peso_obj, orden)
+            VALUES ($1, $2, $3, $4, $5, $6)`,
+            [routineId, ej.ejercicio, ej.series_obj, ej.reps_obj, ej.peso_obj, i]
+        );
+    }
+}
 
 app.get('/', (req, res) => {
     res.send('FORJA backend activo');

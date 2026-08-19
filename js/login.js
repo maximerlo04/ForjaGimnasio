@@ -51,11 +51,14 @@ function loginClick(){
 }
 
 function logout(){
-    localStorage.removeItem('forja_token');
-    localStorage.removeItem('forja_user');
+    const confirmar = confirm("¿Seguro que quieres cerrar sesión?");
+    if (confirmar){
+        localStorage.removeItem('forja_token');
+        localStorage.removeItem('forja_user');
 
-    document.querySelectorAll('.solo-logueado').forEach(el => el.style.display = "none");
-    document.querySelector('.login-button').textContent = 'Iniciar sesión'
+        document.querySelectorAll('.solo-logueado').forEach(el => el.classList.remove('visible'));
+        document.querySelector('.login-button').textContent = 'Iniciar sesión'
+    }
 }
 
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
@@ -113,7 +116,7 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
 });
 
 function onLoginSuccess(){
-    document.querySelectorAll('.solo-logueado').forEach(el => el.style.display = '');
+    document.querySelectorAll('.solo-logueado').forEach(el => el.classList.add('visible'));
     document.querySelector('.login-button').textContent = 'Cerrar sesión';
 }
 

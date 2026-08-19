@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORJA | Rutina</title>
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/chat.css">
+    <link rel="stylesheet" href="styles/mobile.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+    <script src="js/chat.js" defer></script>
+    <script src="js/login.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav class="nav">
+            <div id="hamburguer">
+                <i class="ti ti-menu-2 hamburger"></i>
+            </div>
+            <div class="logo">
+                FOR
+                <span>JA</span>
+            </div>
+            <ul class="nav__list">
+                <li class="nav__item"><a href="#Classes">Clases</a></li>
+                <li class="nav__item"><a href="#Chat">Entrenador IA</a></li>
+                <li class="nav__item"><a href="#Trainers">Profesores</a></li>
+                <li class="nav__item"><a href="#Plans">Planes</a></li>
+                <li class="nav__item"><a href="routine.html" class="solo-logueado" style="display:none">Tu rutina</a></li>
+            </ul>
+            <button class="login-button" onclick="loginClick()">Iniciar sesión</button>
+        </nav>
+    </header>
+    <section id="Rutine">
+        <div id="routineContainer"></div>
+        <script src="js/login.js" defer></script>
+        <script src="js/routine.js" defer></script>
+    </section>
+</body>
+</html>
