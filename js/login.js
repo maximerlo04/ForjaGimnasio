@@ -1,9 +1,13 @@
 // ===== Estado de sesión =====
+
+if(isLoggedIn()){
+    onLoginSuccess();
+}
+
 function isLoggedIn(){
     return !!localStorage.getItem('forja_token');
 }
 
-// ===== Modal =====
 function openModal(){
     document.getElementById("modal-overlay").classList.add("open");
 }
@@ -20,7 +24,6 @@ function showAuthTab(which){
     document.getElementById("registerForm").style.display = isLogin ? 'none' : 'block';
 }
 
-// ===== Gate del chat =====
 function openChat(){
     if(!isLoggedIn()){
         openModal();
@@ -31,7 +34,6 @@ function openChat(){
     cwInput.focus();
 }
 
-// ===== Gate de planes =====
 function planClick(){
     if(!isLoggedIn()){
         openModal();
@@ -40,7 +42,22 @@ function planClick(){
     document.getElementById('Plans').scrollIntoView({behavior:'smooth'});
 }
 
-// ===== Login real (conectado al backend) =====
+function loginClick(){
+    if(isLoggedIn()){
+        logout();
+    } else {
+        openModal();
+    }
+}
+
+function logout(){
+    localStorage.removeItem('forja_token');
+    localStorage.removeItem('forja_user');
+
+    document.querySelectorAll('.solo-logueado').forEach(el => el.style.display = "none");
+    document.querySelector('.login-button').textContent = 'Iniciar sesión'
+}
+
 document.getElementById('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = e.target.querySelector('input[type=email]').value;
@@ -67,7 +84,6 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     }
 });
 
-// ===== Registro real (conectado al backend) =====
 document.getElementById('registerForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const inputs = e.target.querySelectorAll('input');
@@ -96,13 +112,11 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
     }
 });
 
-// ===== Qué pasa cuando el login/registro sale bien =====
 function onLoginSuccess(){
     document.querySelectorAll('.solo-logueado').forEach(el => el.style.display = '');
-    document.getElementById('trial-button').textContent = 'Mi cuenta';
+    document.getElementById('login-button').textContent = 'Cerrar sesión';
 }
 
-// al cargar la página, revisar si ya había sesión iniciada de antes
 if(isLoggedIn()){
     onLoginSuccess();
 }
