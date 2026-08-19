@@ -114,7 +114,7 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
 
 function onLoginSuccess(){
     document.querySelectorAll('.solo-logueado').forEach(el => el.style.display = '');
-    document.getElementById('login-button').textContent = 'Cerrar sesión';
+    document.querySelector('.login-button').textContent = 'Cerrar sesión';
 }
 
 if(isLoggedIn()){
