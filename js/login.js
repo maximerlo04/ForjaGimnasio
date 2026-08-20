@@ -61,7 +61,9 @@ function logout(){
     }
 }
 
-document.getElementById('loginForm').addEventListener('submit', async (e) => {
+const loginFormEl = document.getElementById('loginForm');
+if(loginFormEl){
+    loginFormEl.addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = e.target.querySelector('input[type=email]').value;
     const password = e.target.querySelector('input[type=password]').value;
@@ -85,9 +87,13 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         console.error(err);
         alert('Error de conexión');
     }
-});
+    });
 
-document.getElementById('registerForm').addEventListener('submit', async (e) => {
+}
+
+const registerFormEl = document.getElementById('registerForm');
+if(registerFormEl){
+    registerFormEl.addEventListener('submit', async (e) => {
     e.preventDefault();
     const inputs = e.target.querySelectorAll('input');
     const nombre = inputs[0].value;
@@ -114,6 +120,7 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
         alert('Error de conexión');
     }
 });
+}
 
 function onLoginSuccess(){
     document.querySelectorAll('.solo-logueado').forEach(el => el.classList.add('visible'));

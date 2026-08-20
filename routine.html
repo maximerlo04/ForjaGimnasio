@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles/layout.css">
     <link rel="stylesheet" href="styles/chat.css">
     <link rel="stylesheet" href="styles/mobile.css">
+    <link rel="stylesheet" href="styles/routine.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
@@ -28,15 +29,22 @@
                 <li class="nav__item"><a href="#Chat">Entrenador IA</a></li>
                 <li class="nav__item"><a href="#Trainers">Profesores</a></li>
                 <li class="nav__item"><a href="#Plans">Planes</a></li>
-                <li class="nav__item"><a href="routine.html" class="solo-logueado" style="display:none">Tu rutina</a></li>
+                <li class="nav__item"><a href="routine.html">Tu rutina</a></li>
             </ul>
             <button class="login-button" onclick="loginClick()">Iniciar sesión</button>
         </nav>
     </header>
-    <section id="Rutine">
+    <div class="routine-wrap">
+        <div class="page-head">
+            <div>
+                <div class="eyebrow">MI ENTRENAMIENTO</div>
+                <h1>Rutina de esta semana</h1>
+            </div>
+            <div class="streak">🔥 <span>Racha: <b id="rachaVal">-</b></span></div>
+        </div>
+        <p class="sub-line">Cargá lo que hiciste en cada ejercicio. El Entrenador IA lo va a tener en cuenta para ajustar tu próxima sesión.</p>
+        
         <div id="routineContainer"></div>
-        <script src="js/login.js" defer></script>
-        <script src="js/routine.js" defer></script>
-    </section>
+    </div>
 </body>
 </html>

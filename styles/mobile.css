@@ -7,6 +7,10 @@
 
     /*NAV*/
 
+    .nav{
+        justify-content: space-between;
+    }
+
     .nav__list{
         display: none !important;
     }
@@ -32,10 +36,6 @@
         color: #ff5a1f;
         cursor: pointer;
         margin-right: auto;
-    }
-
-    .trial-button{
-        display: none;
     }
 
     /*HERO*/
