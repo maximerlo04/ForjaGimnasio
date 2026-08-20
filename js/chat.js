@@ -17,7 +17,7 @@ function guradarHistorial(){
 
 function cargarHistorial(){
     const guardado = localStorage.getItem(STORAGE_KEY);
-    if(!guardado) return FragmentDirective
+    if(!guardado) return false;
 
     try{
         const historial = JSON.parse(guardado);
@@ -51,6 +51,8 @@ function closeChat(){
 async function callHerrero(userText){
     conversationHistory.push({ role: 'user', content: userText });
     guradarHistorial();
+
+    const token = localStorage.getItem('forja_token');
 
     try {
     const response = await fetch(API_URL, {
