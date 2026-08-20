@@ -201,7 +201,7 @@ app.post('/api/chat', requireAuth, async (req, res) => {
                 'Authorization': `Bearer ${process.env.GROQ_API_KEY}`
             },
             body: JSON.stringify({
-                model: 'llama-3.1-8b-instant',
+                model: 'openai/gpt-oss-120b',
                 max_tokens: 500,
                 messages: [
                     { role: 'system', content: SYSTEM_PROMPT },
