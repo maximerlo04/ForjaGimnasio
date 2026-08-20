@@ -78,7 +78,6 @@ body{
     background:#38352c;
 }
 
-/* card de ejercicio */
 .exercise-card{
     background:#1c1a15;
     border:1px solid #38352c;
@@ -108,7 +107,6 @@ body{
     color:#ff8a3d;
 }
 
-/* pill de estado */
 .status-pill{
     font-family:'IBM Plex Mono', monospace;
     font-size:11px;
@@ -131,7 +129,6 @@ body{
     border:1px solid #38352c;
 }
 
-/* fila para cargar el registro */
 .log-row{
     display:grid;
     grid-template-columns:1fr 1fr 1fr auto;
@@ -188,7 +185,6 @@ body{
     transform:translateY(-1px);
 }
 
-/* nota de lo ya cargado */
 .logged-note{
     margin-top:12px;
     padding:10px 12px;
@@ -206,7 +202,6 @@ body{
     color:#f2eee3;
 }
 
-/* feedback del Entrenador IA */
 .herrero-feedback{
     margin-top:18px;
     background:#231f18;
@@ -249,7 +244,6 @@ body{
     display:block;
 }
 
-/* resumen semanal */
 .summary{
     background:#1c1a15;
     border:1px solid #38352c;
@@ -280,7 +274,6 @@ body{
     margin-top:4px;
 }
 
-/* estado vacío, sin rutina todavía */
 .empty-state{
     text-align:center;
     padding:60px 24px;

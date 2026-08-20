@@ -58,6 +58,8 @@ function logout(){
 
         document.querySelectorAll('.solo-logueado').forEach(el => el.classList.remove('visible'));
         document.querySelector('.login-button').textContent = 'Iniciar sesión'
+
+        window.location.href = 'index.html'
     }
 }
 
