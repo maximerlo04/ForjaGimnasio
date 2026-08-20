@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
     <script src="js/chat.js" defer></script>
     <script src="js/login.js" defer></script>
+    <script src="js/routine.js" defer></script>
 </head>
 <body>
     <header>
@@ -25,10 +26,10 @@
                 <span>JA</span>
             </div>
             <ul class="nav__list">
-                <li class="nav__item"><a href="#Classes">Clases</a></li>
-                <li class="nav__item"><a href="#Chat">Entrenador IA</a></li>
-                <li class="nav__item"><a href="#Trainers">Profesores</a></li>
-                <li class="nav__item"><a href="#Plans">Planes</a></li>
+                <li class="nav__item"><a href="index.html#Classes">Clases</a></li>
+                <li class="nav__item"><a onclick="openChat()">Entrenador IA</a></li>
+                <li class="nav__item"><a href="index.html#Trainers">Profesores</a></li>
+                <li class="nav__item"><a href="index.html#Plans">Planes</a></li>
                 <li class="nav__item"><a href="routine.html">Tu rutina</a></li>
             </ul>
             <button class="login-button" onclick="loginClick()">Iniciar sesión</button>
@@ -45,6 +46,37 @@
         <p class="sub-line">Cargá lo que hiciste en cada ejercicio. El Entrenador IA lo va a tener en cuenta para ajustar tu próxima sesión.</p>
         
         <div id="routineContainer"></div>
+    </div>
+    <button class="chat-launcher" id="launcher" onclick="openChat()" style="display: none;">
+        <span class="dot"></span>
+        🔥 Entrenador IA
+    </button>
+    <div class="chat-window" id="chatWindow">
+        <div class="cw-head">
+            <div class="dc-avatar">🔥</div>
+            <div class="meta">
+                <div class="name">Entrenador IA</div>
+                <div class="status">
+                    Asistente de rutinas · en línea
+                </div>
+            </div>
+            <button class="cw-close" onclick="closeChat()">X</button>
+        </div>
+        <div class="cw-body" id="cwBody">
+            <div class="bubble bot">
+                Che, ¿cómo venís? Contame qué entrenaste hoy o tocá una opción y armamos la rutina.
+            </div>
+        </div>
+        <div class="cw-quick" id="cwQuick">
+            <span class="chip" onclick="quickMsg('Armar Rutina')">Armar Rutina</span>
+            <span class="chip" onclick="quickMsg('Soy Principiante')">Soy Principiante</span>
+            <span class="chip" onclick="quickMsg('Estoy con dolor')">Estoy con dolor</span>
+            <span class="chip" onclick="quickMsg('Quiero saber la tecnica de cierto ejercicio')">Quiero saber la tecnica de cierto ejercicio</span>
+        </div>
+        <div class="cw-input-row">
+            <input type="text" id="cwInput" placeholder="Escribi tu consulta..." onkeydown="if(event.key==='Enter')sendMsg()">
+            <button class="cw-send" onclick="sendMsg()">➤</button>
+        </div>
     </div>
 </body>
 </html>
