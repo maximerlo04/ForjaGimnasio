@@ -109,7 +109,7 @@ function requireAuth(req, res, next){
 
 app.get('/api/routine', requireAuth, async(req, res)=>{
     try{
-        const rutine = await pool.query(
+        const routine = await pool.query(
             'SELECT * FROM routines WHERE user_id = $1 AND activa = true LIMIT 1',
             [req.userId]
         );
@@ -118,9 +118,9 @@ app.get('/api/routine', requireAuth, async(req, res)=>{
             return res.json({rutine: null, excercises: []});
         }
 
-        const excercises = await pool.query(
+        const exercises = await pool.query(
             'SELECT * FROM routine_exercises WHERE routine_id = $1 ORDER BY orden',
-            [rutine.rows[0].id]
+            [routine.rows[0].id]
         )
 
         res.json({ routine: routine.rows[0], excercises: excercises.rows});
@@ -201,7 +201,7 @@ app.post('/api/chat', requireAuth, async (req, res) => {
                 'Authorization': `Bearer ${process.env.GROQ_API_KEY}`
             },
             body: JSON.stringify({
-                model: 'llama-3.3-70b-versatile',
+                model: 'llama-3.1-8b-instant',
                 max_tokens: 500,
                 messages: [
                     { role: 'system', content: SYSTEM_PROMPT },
