@@ -156,25 +156,25 @@ Preguntá objetivo, días disponibles, experiencia y lesiones de a poco antes de
 No diagnostiques lesiones ni recomiendes fármacos o dietas restrictivas.
 Respuestas cortas, 4-6 líneas, como un chat real.
 
-Cuando ya tengas info suficiente y quieras guardar o actualizar la rutina del usuario,
-agregá al FINAL de tu respuesta (después de tu mensaje normal en texto) un bloque así,
-exactamente con estas etiquetas, sin explicarlo en el texto visible:
+Cuando ya tengas info suficiente, armá la rutina COMPLETA de una sola vez (todos los días,
+todos los ejercicios) y agregá al FINAL de tu respuesta un bloque así, exactamente con estas
+etiquetas, sin explicarlo en el texto visible:
 
 <<ROUTINE>>
 {
     "nombre": "Rutina de fuerza",
     "ejercicios": [
-        { "dia": "Día 1 - Push", "ejercicio": "Press banca", "series_obj": 4, "reps_obj": "8-12", "peso_obj": 40 },
-        { "dia": "Día 1 - Push", "ejercicio": "Press militar", "series_obj": 3, "reps_obj": "10-12", "peso_obj": 15 },
-        { "dia": "Día 2 - Pull", "ejercicio": "Jalón al pecho", "series_obj": 4, "reps_obj": "8-12", "peso_obj": 40 }
+        { "dia": "Día 1 - Push", "ejercicio": "Press banca", "series_obj": 4, "reps_obj": "8-12", "peso_obj": 40 }
     ]
 }
 <<END>>
 
-IMPORTANTE: cada ejercicio del bloque tiene que tener el campo "dia" indicando a qué
-día de la rutina pertenece (ej: "Día 1 - Push", "Día 2 - Pull"). El bloque es obligatorio
-y tiene prioridad — si tenés que elegir entre una explicación más corta en el texto o no
-completar el bloque, siempre priorizá completar el bloque entero.`;
+REGLAS ESTRICTAS sobre este bloque:
+- Mandalo UNA SOLA VEZ en toda la conversación, cuando la rutina esté totalmente definida y completa.
+- TODOS los ejercicios deben incluir el campo "dia" (ej: "Día 1 - Push"), sin excepción.
+- Si el usuario pide un ajuste a una rutina ya armada (cambiar un ejercicio, un peso), mandá el
+bloque de nuevo pero con la rutina COMPLETA actualizada (todos los ejercicios, no solo el que cambió).
+- Nunca mandes un bloque parcial o incompleto.`;
 
 app.post('/api/chat', requireAuth, async (req, res) => {
     const { messages } = req.body;
@@ -227,8 +227,18 @@ app.post('/api/chat', requireAuth, async (req, res) => {
         if(match){
             try{
                 const rutinaData = JSON.parse(match[1].trim());
-                await guardarRutina(req.userId, rutinaData);
-                reply = reply.replace(match[0], '').trim();
+
+                const valido = Array.isArray(rutinaData.ejercicios) &&
+                    rutinaData.ejercicios.length > 0 &&
+                    rutinaData.ejercicios.every(ej => ej.dia && ej.ejercicio && ej.series_obj);
+
+                if(!valido){
+                    console.warn('Bloque de rutina incompleto, se ignora:', rutinaData);
+                } else {
+                    await guardarRutina(req.userId, rutinaData);
+                    reply = reply.replace(match[0], '').trim();
+                }
+
             }catch(err){
                 console.error('Error al parsear rutina modelo:', err);
             }
