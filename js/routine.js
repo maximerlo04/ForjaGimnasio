@@ -43,7 +43,7 @@ function renderizarEjercicios(exercises){
 
     const porDia = {};
 
-    exercises.forEach(ex =>{
+    exercises.forEach(ex => {
         const dia = ex.dia || 'General';
         if(!porDia[dia]) porDia[dia] = [];
         porDia[dia].push(ex);
@@ -54,27 +54,27 @@ function renderizarEjercicios(exercises){
         tag.className = 'day-tag';
         tag.textContent = dia;
         container.appendChild(tag);
-    })
 
-    porDia[dia].forEach(ex => {
-        const card = document.createElement('div');
-        card.className = 'exercise-card'
-        card.innerHTML = `
-            <div class="ex-top">
-                <div>
-                    <div class="ex-name">${ex.ejercicio}</div>
-                    <div class="ex-target">Objetivo: ${ex.series_obj}×${ex.reps_obj} · ${ex.peso_obj}kg</div>
+        porDia[dia].forEach(ex => {
+            const card = document.createElement('div');
+            card.className = 'exercise-card';
+            card.innerHTML = `
+                <div class="ex-top">
+                    <div>
+                        <div class="ex-name">${ex.ejercicio}</div>
+                        <div class="ex-target">Objetivo: ${ex.series_obj}×${ex.reps_obj} · ${ex.peso_obj}kg</div>
+                    </div>
+                    <span class="status-pill pending">Pendiente</span>
                 </div>
-                <span class="status-pill pending">Pendiente</span>
-            </div>
-            <div class="log-row">
-                <div class="log-field"><label>Series</label><input type="number" class="input-series"></div>
-                <div class="log-field"><label>Reps</label><input type="number" class="input-reps"></div>
-                <div class="log-field"><label>Peso (kg)</label><input type="number" class="input-peso"></div>
-                <button class="log-btn" onclick="guardarRegistro(${ex.id}, this)">Guardar</button>
-            </div>
+                <div class="log-row">
+                    <div class="log-field"><label>Series</label><input type="number" class="input-series"></div>
+                    <div class="log-field"><label>Reps</label><input type="number" class="input-reps"></div>
+                    <div class="log-field"><label>Peso (kg)</label><input type="number" class="input-peso"></div>
+                    <button class="log-btn" onclick="guardarRegistro(${ex.id}, this)">Guardar</button>
+                </div>
             `;
-        container.appendChild(card)
+            container.appendChild(card);
+        });
     });
 }
 

@@ -112,6 +112,10 @@ async function respondTo(text){
     hideTyping();
     addBubble(reply, 'bot');
 
+    if (typeof cargarRutina === 'function') {
+        cargarRutina();
+    }
+
     isWaitingResponse = false;
     cwInput.disabled = false;
     cwQuick.style.pointerEvents = 'auto';
