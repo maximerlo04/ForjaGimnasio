@@ -268,7 +268,7 @@ async function guardarRutina(userId, rutinaData){
     for(const [i, ej] of rutinaData.ejercicios.entries()){
         await pool.query(
             `INSERT INTO routine_exercises (routine_id, ejercicio, series_obj, reps_obj, peso_obj, orden, dia)
-            VALUES ($1, $2, $3, $4, $5, $6)`,
+            VALUES ($1, $2, $3, $4, $5, $6, $7)`,
             [routineId, ej.ejercicio, ej.series_obj, ej.reps_obj, ej.peso_obj, i, ej.dia || 'General']
         );
     }

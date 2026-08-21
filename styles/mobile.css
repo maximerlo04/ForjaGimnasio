@@ -8,8 +8,25 @@
     /*NAV*/
 
     .nav{
-        display: flex;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: 30px 1fr 60px; 
+        align-items: center;
+    }
+
+    #hamburguer{
+        justify-self: start;
+    }
+
+    .logo{
+        justify-self: center;
+        grid-column: 2;
+    }
+
+    .login-button{
+        justify-self: end;
+        font-size: 12px;        
+        padding: 8px 10px;
+        white-space: nowrap;
     }
 
     .nav__list{
