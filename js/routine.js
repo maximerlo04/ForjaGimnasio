@@ -41,8 +41,22 @@ function renderizarEjercicios(exercises){
     const container = document.getElementById('routineContainer');
     container.innerHTML = '';
 
+    const porDia = {};
+
     exercises.forEach(ex =>{
-        const card = document.createElement('div');
+        const dia = ex.dia || 'General';
+        if(!porDia[dia]) porDia[dia] = [];
+        porDia[dia].push(ex);
+
+        Object.keys(porDia).forEach(dia => {
+            const tag = document.createElement('div');
+            tag.className = 'day-tag';
+            tag.textContent = dia;
+            container.appendChild(tag);
+        })
+
+        porDia[dia].forEach(ex => {
+            const card = document.createElement('div');
         card.className = 'exercise-card'
         card.innerHTML = `
             <div class="ex-top">
@@ -58,9 +72,10 @@ function renderizarEjercicios(exercises){
                 <div class="log-field"><label>Peso (kg)</label><input type="number" class="input-peso"></div>
                 <button class="log-btn" onclick="guardarRegistro(${ex.id}, this)">Guardar</button>
             </div>
-        `
-        container.appendChild(card)
-    });
+            `;
+            container.appendChild(card)
+        });
+    })
 }
 
 async function guardarRegistro(routineExercise, btnEl){

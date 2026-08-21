@@ -201,4 +201,18 @@
         flex: 1;
         min-height: 0; /* necesario para que el scroll interno funcione bien dentro de un flex con altura 100% */
     }
+
+    /*TU RUTINA*/
+    .routine-wrap{
+        padding-top:90px;
+    }
+    .log-row{
+        grid-template-columns:1fr 1fr;
+    }
+    .log-btn{
+        grid-column:1/-1;
+    }
+    .summary{
+        grid-template-columns:1fr;
+    }
 }

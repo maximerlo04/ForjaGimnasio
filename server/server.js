@@ -164,13 +164,17 @@ exactamente con estas etiquetas, sin explicarlo en el texto visible:
 {
     "nombre": "Rutina de fuerza",
     "ejercicios": [
-        { "ejercicio": "Sentadilla", "series_obj": 4, "reps_obj": "6-8", "peso_obj": 80 },
-        { "ejercicio": "Press banca", "series_obj": 4, "reps_obj": "6-8", "peso_obj": 60 }
+        { "dia": "Día 1 - Push", "ejercicio": "Press banca", "series_obj": 4, "reps_obj": "8-12", "peso_obj": 40 },
+        { "dia": "Día 1 - Push", "ejercicio": "Press militar", "series_obj": 3, "reps_obj": "10-12", "peso_obj": 15 },
+        { "dia": "Día 2 - Pull", "ejercicio": "Jalón al pecho", "series_obj": 4, "reps_obj": "8-12", "peso_obj": 40 }
     ]
 }
 <<END>>
 
-Solo incluí ese bloque cuando definís o modificás la rutina completa, no en cada mensaje.`;
+IMPORTANTE: cada ejercicio del bloque tiene que tener el campo "dia" indicando a qué
+día de la rutina pertenece (ej: "Día 1 - Push", "Día 2 - Pull"). El bloque es obligatorio
+y tiene prioridad — si tenés que elegir entre una explicación más corta en el texto o no
+completar el bloque, siempre priorizá completar el bloque entero.`;
 
 app.post('/api/chat', requireAuth, async (req, res) => {
     const { messages } = req.body;
@@ -202,7 +206,7 @@ app.post('/api/chat', requireAuth, async (req, res) => {
             },
             body: JSON.stringify({
                 model: 'openai/gpt-oss-120b',
-                max_tokens: 1500,
+                max_tokens: 2000,
                 messages: [
                     { role: 'system', content: SYSTEM_PROMPT },
                     ...messages
@@ -253,9 +257,9 @@ async function guardarRutina(userId, rutinaData){
 
     for(const [i, ej] of rutinaData.ejercicios.entries()){
         await pool.query(
-            `INSERT INTO routine_exercises (routine_id, ejercicio, series_obj, reps_obj, peso_obj, orden)
+            `INSERT INTO routine_exercises (routine_id, ejercicio, series_obj, reps_obj, peso_obj, orden, dia)
             VALUES ($1, $2, $3, $4, $5, $6)`,
-            [routineId, ej.ejercicio, ej.series_obj, ej.reps_obj, ej.peso_obj, i]
+            [routineId, ej.ejercicio, ej.series_obj, ej.reps_obj, ej.peso_obj, i, ej.dia || 'General']
         );
     }
 }
