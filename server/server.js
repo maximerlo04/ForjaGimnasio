@@ -206,7 +206,7 @@ app.post('/api/chat', requireAuth, async (req, res) => {
             },
             body: JSON.stringify({
                 model: 'openai/gpt-oss-120b',
-                max_tokens: 2000,
+                max_tokens: 3000,
                 messages: [
                     { role: 'system', content: SYSTEM_PROMPT },
                     ...messages

@@ -47,16 +47,17 @@ function renderizarEjercicios(exercises){
         const dia = ex.dia || 'General';
         if(!porDia[dia]) porDia[dia] = [];
         porDia[dia].push(ex);
+    });
 
-        Object.keys(porDia).forEach(dia => {
-            const tag = document.createElement('div');
-            tag.className = 'day-tag';
-            tag.textContent = dia;
-            container.appendChild(tag);
-        })
+    Object.keys(porDia).forEach(dia => {
+        const tag = document.createElement('div');
+        tag.className = 'day-tag';
+        tag.textContent = dia;
+        container.appendChild(tag);
+    })
 
-        porDia[dia].forEach(ex => {
-            const card = document.createElement('div');
+    porDia[dia].forEach(ex => {
+        const card = document.createElement('div');
         card.className = 'exercise-card'
         card.innerHTML = `
             <div class="ex-top">
@@ -73,9 +74,8 @@ function renderizarEjercicios(exercises){
                 <button class="log-btn" onclick="guardarRegistro(${ex.id}, this)">Guardar</button>
             </div>
             `;
-            container.appendChild(card)
-        });
-    })
+        container.appendChild(card)
+    });
 }
 
 async function guardarRegistro(routineExercise, btnEl){
@@ -91,10 +91,10 @@ async function guardarRegistro(routineExercise, btnEl){
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
-                'Authorization': `Bearer: ${token}`
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({
-                routine_exercise_id: routineExerciseId,
+                routine_exercise_id: routineExercise,
                 series_real, reps_real, peso_real
             })
         });
