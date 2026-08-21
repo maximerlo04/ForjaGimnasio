@@ -223,7 +223,7 @@ app.post('/api/chat', requireAuth, async (req, res) => {
         if(match){
             try{
                 const rutinaData = JSON.parse(match[1].trim());
-                await guardarRuitna(req.userId, rutinaData);
+                await guardarRutina(req.userId, rutinaData);
                 reply = reply.replace(match[0], '').trim();
             }catch(err){
                 console.error('Error al parsear rutina modelo:', err);
@@ -249,7 +249,7 @@ async function guardarRutina(userId, rutinaData){
         [userId, rutinaData.nombre || 'Mi rutina']
     );
 
-    const rutineId = nuevaRutina.rows[0].id;
+    const routineId = nuevaRutina.rows[0].id;
 
     for(const [i, ej] of rutinaData.ejercicios.entries()){
         await pool.query(
