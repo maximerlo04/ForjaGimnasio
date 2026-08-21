@@ -115,7 +115,7 @@ app.get('/api/routine', requireAuth, async(req, res)=>{
         );
 
         if(routine.rows.length === 0){
-            return res.json({rutine: null, excercises: []});
+            return res.json({routine: null, exercises: []});
         }
 
         const exercises = await pool.query(
@@ -123,7 +123,7 @@ app.get('/api/routine', requireAuth, async(req, res)=>{
             [routine.rows[0].id]
         )
 
-        res.json({ routine: routine.rows[0], excercises: excercises.rows});
+        res.json({ routine: routine.rows[0], exercises: exercises.rows});
     }catch(err){
         console.error('Error al traer rutina', err)
         res.status(500).json({error: 'Error al cargar la rutina'})
